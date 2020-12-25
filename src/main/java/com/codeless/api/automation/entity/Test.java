@@ -32,4 +32,11 @@ public class Test {
       inverseJoinColumns = {@JoinColumn(name = "execution_id")}
   )
   private Set<Execution> executions;
+  @ManyToMany
+  @JoinTable(
+      name = "tests_schedules",
+      joinColumns = {@JoinColumn(name = "test_id")},
+      inverseJoinColumns = {@JoinColumn(name = "id")}
+  )
+  private Set<Schedule> schedules;
 }
