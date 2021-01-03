@@ -22,6 +22,8 @@ public class Schedule {
   private Long id;
   @Column
   private String name;
+  @Column(name = "internal_name")
+  private String internalName;
   @OneToOne
   @JoinColumn(name = "region", referencedColumnName = "id")
   private Region region;
