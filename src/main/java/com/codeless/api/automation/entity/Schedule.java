@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -24,6 +25,9 @@ public class Schedule {
   private String name;
   @Column(name = "internal_name")
   private String internalName;
+  @Lob
+  @Column
+  private String timer;
   @OneToOne
   @JoinColumn(name = "region", referencedColumnName = "id")
   private Region region;
