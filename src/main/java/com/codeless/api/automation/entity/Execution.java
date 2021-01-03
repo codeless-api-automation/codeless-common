@@ -31,14 +31,14 @@ public class Execution {
   @Enumerated(EnumType.ORDINAL)
   @Column
   private ExecutionStatus status;
-  @Column(name = "execution_id")
-  private Long executionId;
+  @Column(name = "schedule_id")
+  private Long scheduleId;
   @OneToOne
   @JoinColumn(name = "region", referencedColumnName = "id")
   private Region region;
   @ManyToMany(targetEntity = Test.class)
   @JoinTable(name = "tests_executions",
-      joinColumns = {@JoinColumn(name = "execution_id")},
+      joinColumns = {@JoinColumn(name = "id")},
       inverseJoinColumns = {@JoinColumn(name = "test_id")})
   private List<Test> tests;
   @OneToOne(cascade = {CascadeType.ALL})

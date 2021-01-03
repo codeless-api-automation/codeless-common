@@ -29,7 +29,7 @@ public class Test {
   @JoinTable(
       name = "tests_executions",
       joinColumns = {@JoinColumn(name = "test_id")},
-      inverseJoinColumns = {@JoinColumn(name = "execution_id")}
+      inverseJoinColumns = {@JoinColumn(name = "id")}
   )
   private Set<Execution> executions;
   @ManyToMany
