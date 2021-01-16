@@ -1,6 +1,5 @@
 package com.codeless.api.automation.entity.security;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import java.util.Collection;
 import java.util.Collections;
 import javax.persistence.Column;
@@ -23,7 +22,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Table(name = "users")
 @Data
 @Accessors(chain = true)
-@JsonView(View.ALLOWED.class)
 public class User implements UserDetails {
 
   @Id
@@ -38,12 +36,10 @@ public class User implements UserDetails {
   @Size(max = 100, min = 5, message = "Invalid password size. Min - 5, Max - 100.")
   @NotEmpty
   @Column(name = "password")
-  @JsonView(View.NOT_ALLOWED.class)
   private String password;
 
   @Enumerated(EnumType.STRING)
   @Column(name = "role")
-  @JsonView(View.NOT_ALLOWED.class)
   private UserRole role;
 
   @Column(name = "is_account_non_expired")
@@ -59,7 +55,6 @@ public class User implements UserDetails {
   private boolean isEnabled;
 
   @Override
-  @JsonView(View.NOT_ALLOWED.class)
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return Collections.singletonList(new SimpleGrantedAuthority(role.name()));
   }
