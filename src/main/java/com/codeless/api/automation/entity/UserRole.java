@@ -1,4 +1,4 @@
-package com.codeless.api.automation.entity.security;
+package com.codeless.api.automation.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.codeless.api.automation.entity.security;
+package com.codeless.api.automation.entity;
 
 import java.util.Collection;
 import java.util.Collections;
