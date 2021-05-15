@@ -33,6 +33,14 @@ public class User implements UserDetails {
   @Email
   private String username;
 
+  @Column(name = "first_name")
+  @NotEmpty
+  private String firstName;
+
+  @Column(name = "last_name")
+  @NotEmpty
+  private String lastName;
+
   @Size(max = 100, min = 5, message = "Invalid password size. Min - 5, Max - 100.")
   @NotEmpty
   @Column(name = "password")
