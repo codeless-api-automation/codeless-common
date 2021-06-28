@@ -1,11 +1,13 @@
 package com.codeless.api.automation.entity;
 
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -36,11 +38,8 @@ public class Execution {
   @OneToOne
   @JoinColumn(name = "region", referencedColumnName = "id")
   private Region region;
-  @ManyToMany(targetEntity = Test.class)
-  @JoinTable(name = "tests_executions",
-      joinColumns = {@JoinColumn(name = "id")},
-      inverseJoinColumns = {@JoinColumn(name = "test_id")})
-  private List<Test> tests;
+  @ManyToMany
+  private Set<Test> tests;
   @OneToOne(cascade = {CascadeType.ALL})
   @JoinColumn(name = "result", referencedColumnName = "id")
   private Result result;

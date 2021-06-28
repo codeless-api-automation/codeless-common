@@ -4,8 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Data;
 
@@ -17,9 +15,8 @@ public class Region {
   @Id
   @GeneratedValue
   private Long id;
-  @OneToOne
-  @JoinColumn(name = "country", referencedColumnName = "id")
-  private Country country;
+  @Column(name = "country_id")
+  private Long countryId;
   @Column
   private String city;
   @Column(name = "default_region")
