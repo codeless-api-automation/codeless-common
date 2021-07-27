@@ -28,6 +28,10 @@ public class User implements UserDetails {
   @GeneratedValue
   private Long id;
 
+  @Column(name = "uuid")
+  @NotEmpty
+  private String uuid;
+
   @Column(name = "username")
   @NotEmpty
   @Email
