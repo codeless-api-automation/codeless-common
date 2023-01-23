@@ -3,6 +3,7 @@ package com.codeless.api.automation.entity;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import lombok.Getter;
@@ -14,10 +15,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Getter
 @Setter
 public abstract class BaseEntity {
-
-  @Id
-  @GeneratedValue
-  protected Long id;
 
   @CreationTimestamp
   @Column(name = "created")
