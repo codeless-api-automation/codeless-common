@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
@@ -38,8 +39,8 @@ public class Execution extends BaseEntity {
   @OneToOne
   @JoinColumn(name = "region", referencedColumnName = "id")
   private Region region;
-  @ManyToMany
-  private Set<Test> tests;
+  @Column(name = "test_id")
+  private Long testId;
   @OneToOne(cascade = {CascadeType.ALL})
   @JoinColumn(name = "result", referencedColumnName = "id")
   private Result result;

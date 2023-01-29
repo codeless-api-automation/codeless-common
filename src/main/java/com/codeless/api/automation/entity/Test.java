@@ -20,6 +20,6 @@ public class Test {
   private Long id;
   @Column(nullable = false)
   private String name;
-  @Column(nullable = false)
+  @Column(nullable = false, name = "json", columnDefinition = "text")
   private String json;
 }

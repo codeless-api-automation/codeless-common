@@ -23,6 +23,6 @@ public class Result {
   @Enumerated(EnumType.ORDINAL)
   @Column(nullable = false)
   private TestStatus status;
-  @Column(nullable = false)
+  @Column(nullable = false, name = "logs", columnDefinition = "text")
   private String logs;
 }
