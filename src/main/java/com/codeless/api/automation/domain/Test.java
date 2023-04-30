@@ -12,5 +12,6 @@ public class Test {
   private String requestBody;
   private List<Header> headers;
   private List<Validator> validators;
+  private List<Extractor> extractors;
 
 }

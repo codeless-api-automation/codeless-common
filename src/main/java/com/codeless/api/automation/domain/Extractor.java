@@ -4,9 +4,8 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class Validator {
+public class Extractor {
 
   private String dslName;
-  private String predicate;
   private List<Attribute> inputFields;
 }

@@ -22,8 +22,8 @@ public class Schedule {
   private Long id;
   @Column
   private String name;
-  @Column(name = "internal_name")
-  private String internalName;
+  @Column(name = "uuid")
+  private String uuid;
   @Column
   private String timer;
   @Column
