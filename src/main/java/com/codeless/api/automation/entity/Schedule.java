@@ -22,6 +22,8 @@ public class Schedule {
   private Long id;
   @Column
   private String name;
+  @Column(nullable = false, unique = true)
+  private String username;
   @Column(name = "uuid")
   private String uuid;
   @Column

@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ExecutionRepository extends JpaRepository<Execution, Long> {
 
-  List<Execution> findAllByTestIdAndStatusIn(Long testId, List<ExecutionStatus> statusList);
+  List<Execution> findAllByTestIdAndUsernameAndStatusIn(Long testId, String username, List<ExecutionStatus> statusList);
 }

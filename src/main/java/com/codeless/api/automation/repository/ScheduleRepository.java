@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
-  List<Schedule> findAllByTestId(Long testId);
+  List<Schedule> findAllByTestIdAndUsername(Long testId, String username);
 
 }
