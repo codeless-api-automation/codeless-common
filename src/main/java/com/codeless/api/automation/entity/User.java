@@ -35,7 +35,7 @@ public class User implements UserDetails {
   @NotEmpty
   private String uuid;
 
-  @Column(name = "username")
+  @Column(name = "username", unique = true)
   @NotEmpty
   @Email
   private String username;

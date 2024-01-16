@@ -22,7 +22,7 @@ public class Schedule {
   private Long id;
   @Column
   private String name;
-  @Column(nullable = false, unique = true)
+  @Column(nullable = false)
   private String username;
   @Column(name = "uuid")
   private String uuid;

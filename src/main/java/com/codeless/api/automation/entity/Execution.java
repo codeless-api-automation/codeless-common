@@ -38,7 +38,7 @@ public class Execution extends BaseEntity {
   private Region region;
   @Column(name = "test_id")
   private Long testId;
-  @Column(nullable = false, unique = true)
+  @Column(nullable = false)
   private String username;
   @OneToOne(cascade = {CascadeType.ALL})
   @JoinColumn(name = "result", referencedColumnName = "id")
