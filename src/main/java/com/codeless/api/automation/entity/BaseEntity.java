@@ -1,26 +1,29 @@
 package com.codeless.api.automation.entity;
 
-import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import java.time.Instant;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbAttribute;
 
-@MappedSuperclass
-@Getter
-@Setter
 public abstract class BaseEntity {
 
-  @CreationTimestamp
-  @Column(name = "created")
-  protected LocalDateTime created;
+  private Instant created;
+  private Instant lastModified;
 
-  @UpdateTimestamp
-  @Column(name = "last_modified")
-  protected LocalDateTime lastModified;
+  @DynamoDbAttribute(value = "lastModified")
+  public Instant getLastModified() {
+    return lastModified;
+  }
+
+  public void setLastModified(Instant lastModified) {
+    this.lastModified = lastModified;
+  }
+
+  @DynamoDbAttribute(value = "created")
+  public Instant getCreated() {
+    return created;
+  }
+
+  public void setCreated(Instant created) {
+    this.created = created;
+  }
+
 }

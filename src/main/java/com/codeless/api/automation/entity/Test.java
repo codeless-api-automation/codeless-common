@@ -1,25 +1,64 @@
 package com.codeless.api.automation.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbAttribute;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbImmutable;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSecondaryPartitionKey;
 
-@Entity
-@Table(name = "tests")
-@Getter
-@Setter
-public class Test {
+@DynamoDbBean
+@DynamoDbImmutable(builder = Test.TestBuilder.class)
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Test extends BaseEntity {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-  @Column(nullable = false)
+  public static final String TABLE_NAME = "test";
+  public static final String GIS_TESTS_BY_CUSTOMER_ID = "GIS_TESTS_BY_CUSTOMER_ID";
+  public static final String PARTITION_KEY_ATTRIBUTE_NAME = "id";
+
+  private String id;
   private String name;
-  @Column(nullable = false, name = "json", columnDefinition = "text")
   private String json;
+  private String customerId;
+
+  @DynamoDbPartitionKey
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  @DynamoDbAttribute(value = "")
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  @DynamoDbAttribute(value = "json")
+  public String getJson() {
+    return json;
+  }
+
+  public void setJson(String json) {
+    this.json = json;
+  }
+
+  @DynamoDbAttribute(value = "customerId")
+  @DynamoDbSecondaryPartitionKey(indexNames = {GIS_TESTS_BY_CUSTOMER_ID})
+  public String getCustomerId() {
+    return customerId;
+  }
+
+  public void setCustomerId(String customerId) {
+    this.customerId = customerId;
+  }
 }

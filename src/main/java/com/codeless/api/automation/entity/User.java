@@ -1,76 +1,112 @@
 package com.codeless.api.automation.entity;
 
-import java.util.Collection;
-import java.util.Collections;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbAttribute;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbImmutable;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 
-@Entity
-@Table(name = "users")
-@Getter
-@Setter
-@Accessors(chain = true)
-public class User implements UserDetails {
+@DynamoDbBean
+@DynamoDbImmutable(builder = User.UserBuilder.class)
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class User extends BaseEntity implements Serializable {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  public static final String TABLE_NAME = "user";
+  public static final String PARTITION_KEY_ATTRIBUTE_NAME = "username";
 
-  @Column(name = "uuid")
-  @NotEmpty
-  private String uuid;
-
-  @Column(name = "username")
-  @NotEmpty
-  @Email
+  private String token;
   private String username;
-
-  @Column(name = "first_name")
-  @NotEmpty
   private String firstName;
-
-  @Column(name = "last_name")
-  @NotEmpty
   private String lastName;
-
-  @Size(max = 100, min = 5, message = "Invalid password size. Min - 5, Max - 100.")
-  @NotEmpty
-  @Column(name = "password")
   private String password;
-
-  @Enumerated(EnumType.STRING)
-  @Column(name = "role")
-  private UserRole role;
-
-  @Column(name = "is_account_non_expired")
   private boolean isAccountNonExpired;
-
-  @Column(name = "is_account_non_locked")
   private boolean isAccountNonLocked;
-
-  @Column(name = "is_credentials_non_expired")
   private boolean isCredentialsNonExpired;
-
-  @Column(name = "enabled")
   private boolean isEnabled;
 
-  @Override
-  public Collection<? extends GrantedAuthority> getAuthorities() {
-    return Collections.singletonList(new SimpleGrantedAuthority(role.name()));
+  @DynamoDbPartitionKey
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  @DynamoDbAttribute(value = "token")
+  public String getToken() {
+    return token;
+  }
+
+  public void setToken(String token) {
+    this.token = token;
+  }
+
+  @DynamoDbAttribute(value = "firstName")
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  @DynamoDbAttribute(value = "lastName")
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  @DynamoDbAttribute(value = "password")
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  @DynamoDbAttribute(value = "isAccountNonExpired")
+  public boolean isAccountNonExpired() {
+    return isAccountNonExpired;
+  }
+
+  public void setAccountNonExpired(boolean accountNonExpired) {
+    isAccountNonExpired = accountNonExpired;
+  }
+
+  @DynamoDbAttribute(value = "isAccountNonLocked")
+  public boolean isAccountNonLocked() {
+    return isAccountNonLocked;
+  }
+
+  public void setAccountNonLocked(boolean accountNonLocked) {
+    isAccountNonLocked = accountNonLocked;
+  }
+
+  @DynamoDbAttribute(value = "isCredentialsNonExpired")
+  public boolean isCredentialsNonExpired() {
+    return isCredentialsNonExpired;
+  }
+
+  public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+    isCredentialsNonExpired = credentialsNonExpired;
+  }
+
+  @DynamoDbAttribute(value = "isEnabled")
+  public boolean isEnabled() {
+    return isEnabled;
+  }
+
+  public void setEnabled(boolean enabled) {
+    isEnabled = enabled;
   }
 }

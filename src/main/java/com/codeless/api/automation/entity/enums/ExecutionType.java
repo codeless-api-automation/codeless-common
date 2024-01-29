@@ -1,4 +1,4 @@
-package com.codeless.api.automation.entity;
+package com.codeless.api.automation.entity.enums;
 
 public enum ExecutionType {
   MANUAL_EXECUTION("MANUAL_EXECUTION"),

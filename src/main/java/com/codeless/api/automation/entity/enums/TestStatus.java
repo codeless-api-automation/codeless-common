@@ -1,4 +1,4 @@
-package com.codeless.api.automation.entity;
+package com.codeless.api.automation.entity.enums;
 
 public enum TestStatus {
   SUCCESS("SUCCESS"),
