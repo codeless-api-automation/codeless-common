@@ -3,6 +3,7 @@ package com.codeless.api.automation.entity;
 import com.codeless.api.automation.entity.enums.ExecutionStatus;
 import com.codeless.api.automation.entity.enums.ExecutionType;
 import com.codeless.api.automation.entity.enums.TestStatus;
+import java.time.Instant;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -56,6 +57,12 @@ public class Execution {
       @DynamoDbAttribute(value = "customerId"),
       @DynamoDbSecondaryPartitionKey(indexNames = {GIS_EXECUTIONS_BY_CUSTOMER_ID})}))
   private String customerId;
+  @Setter
+  @Getter(onMethod = @__({@DynamoDbAttribute(value = "created")}))
+  private Instant created;
+  @Setter
+  @Getter(onMethod = @__({@DynamoDbAttribute(value = "lastModified")}))
+  private Instant lastModified;
   @Setter
   @Getter(onMethod = @__({@DynamoDbAttribute(value = "ttl")}))
   private Long ttl;
