@@ -16,7 +16,7 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSecon
 public class Test {
 
   public static final String TABLE_NAME = "test";
-  public static final String GIS_TESTS_BY_CUSTOMER_ID = "GIS_TESTS_BY_CUSTOMER_ID";
+  public static final String GSI_TESTS_BY_CUSTOMER_ID = "GSI_TESTS_BY_CUSTOMER_ID";
   public static final String PARTITION_KEY_ATTRIBUTE_NAME = "id";
 
   @Setter
@@ -31,7 +31,7 @@ public class Test {
   @Setter
   @Getter(onMethod = @__({
       @DynamoDbAttribute(value = "customerId"),
-      @DynamoDbSecondaryPartitionKey(indexNames = {GIS_TESTS_BY_CUSTOMER_ID})}))
+      @DynamoDbSecondaryPartitionKey(indexNames = {GSI_TESTS_BY_CUSTOMER_ID})}))
   private String customerId;
   @Setter
   @Getter(onMethod = @__({@DynamoDbAttribute(value = "created")}))

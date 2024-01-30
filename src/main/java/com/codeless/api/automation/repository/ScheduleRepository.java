@@ -1,7 +1,6 @@
 package com.codeless.api.automation.repository;
 
 import com.codeless.api.automation.entity.Schedule;
-import com.codeless.api.automation.entity.Test;
 import com.codeless.api.automation.exception.EntityAlreadyExistsException;
 import com.codeless.api.automation.exception.PersistenceException;
 import java.util.HashMap;
@@ -74,7 +73,7 @@ public class ScheduleRepository {
           .limit(maxResults)
           .exclusiveStartKey(lastEvaluatedKey)
           .build();
-      return scheduleTable.index(Schedule.GIS_SCHEDULES_BY_TEST_ID)
+      return scheduleTable.index(Schedule.GSI_SCHEDULES_BY_TEST_ID)
           .query(request).stream()
           .limit(1)
           .collect(Collectors.toList())
@@ -97,7 +96,7 @@ public class ScheduleRepository {
           .limit(maxResults)
           .exclusiveStartKey(lastEvaluatedKey)
           .build();
-      return scheduleTable.index(Schedule.GIS_SCHEDULES_BY_CUSTOMER_ID)
+      return scheduleTable.index(Schedule.GSI_SCHEDULES_BY_CUSTOMER_ID)
           .query(request).stream()
           .limit(1)
           .collect(Collectors.toList())

@@ -19,8 +19,8 @@ public class Schedule {
   public static final String TABLE_NAME = "schedule";
 
   public static final String PARTITION_KEY_ATTRIBUTE_NAME = "id";
-  public static final String GIS_SCHEDULES_BY_CUSTOMER_ID = "GIS_SCHEDULES_BY_CUSTOMER_ID";
-  public static final String GIS_SCHEDULES_BY_TEST_ID = "GIS_SCHEDULES_BY_TEST_ID";
+  public static final String GSI_SCHEDULES_BY_CUSTOMER_ID = "GSI_SCHEDULES_BY_CUSTOMER_ID";
+  public static final String GSI_SCHEDULES_BY_TEST_ID = "GIS_SCHEDULES_BY_TEST_ID";
 
   @Setter
   @Getter(onMethod = @__({@DynamoDbPartitionKey}))
@@ -37,7 +37,7 @@ public class Schedule {
   @Setter
   @Getter(onMethod = @__({
       @DynamoDbAttribute(value = "testId"),
-      @DynamoDbSecondaryPartitionKey(indexNames = {GIS_SCHEDULES_BY_TEST_ID})}))
+      @DynamoDbSecondaryPartitionKey(indexNames = {GSI_SCHEDULES_BY_TEST_ID})}))
   private String testId;
   @Setter
   @Getter(onMethod = @__({@DynamoDbAttribute(value = "regionName")}))
@@ -45,7 +45,7 @@ public class Schedule {
   @Setter
   @Getter(onMethod = @__({
       @DynamoDbAttribute(value = "customerId"),
-      @DynamoDbSecondaryPartitionKey(indexNames = {GIS_SCHEDULES_BY_CUSTOMER_ID})}))
+      @DynamoDbSecondaryPartitionKey(indexNames = {GSI_SCHEDULES_BY_CUSTOMER_ID})}))
   private String customerId;
   @Setter
   @Getter(onMethod = @__({@DynamoDbAttribute(value = "created")}))

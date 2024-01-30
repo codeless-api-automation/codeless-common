@@ -80,7 +80,7 @@ public class TestRepository {
         .limit(maxResults)
         .exclusiveStartKey(lastEvaluatedKey)
         .build();
-      return testTable.index(Test.GIS_TESTS_BY_CUSTOMER_ID)
+      return testTable.index(Test.GSI_TESTS_BY_CUSTOMER_ID)
           .query(request).stream()
           .limit(1)
           .collect(Collectors.toList())

@@ -79,7 +79,7 @@ public class ExecutionRepository {
           .limit(maxResults)
           .exclusiveStartKey(lastEvaluatedKey)
           .build();
-      return executionTable.index(Execution.GIS_EXECUTIONS_BY_CUSTOMER_ID)
+      return executionTable.index(Execution.GSI_EXECUTIONS_BY_CUSTOMER_ID)
           .query(request).stream()
           .limit(1)
           .collect(Collectors.toList())
