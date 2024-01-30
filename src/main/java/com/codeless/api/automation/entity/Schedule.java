@@ -1,21 +1,20 @@
 package com.codeless.api.automation.entity;
 
 
+import java.time.Instant;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbAttribute;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
-import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbImmutable;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSecondaryPartitionKey;
 
 @DynamoDbBean
-@DynamoDbImmutable(builder = Schedule.ScheduleBuilder.class)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Schedule extends BaseEntity {
+public class Schedule {
 
   public static final String TABLE_NAME = "schedule";
 
@@ -23,76 +22,35 @@ public class Schedule extends BaseEntity {
   public static final String GIS_SCHEDULES_BY_CUSTOMER_ID = "GIS_SCHEDULES_BY_CUSTOMER_ID";
   public static final String GIS_SCHEDULES_BY_TEST_ID = "GIS_SCHEDULES_BY_TEST_ID";
 
+  @Setter
+  @Getter(onMethod = @__({@DynamoDbPartitionKey}))
   private String id;
+  @Setter
+  @Getter(onMethod = @__({@DynamoDbAttribute(value = "name")}))
   private String name;
+  @Setter
+  @Getter(onMethod = @__({@DynamoDbAttribute(value = "timer")}))
   private String timer;
+  @Setter
+  @Getter(onMethod = @__({@DynamoDbAttribute(value = "emails")}))
   private String emails;
+  @Setter
+  @Getter(onMethod = @__({
+      @DynamoDbAttribute(value = "testId"),
+      @DynamoDbSecondaryPartitionKey(indexNames = {GIS_SCHEDULES_BY_TEST_ID})}))
   private String testId;
+  @Setter
+  @Getter(onMethod = @__({@DynamoDbAttribute(value = "regionName")}))
   private String regionName;
+  @Setter
+  @Getter(onMethod = @__({
+      @DynamoDbAttribute(value = "customerId"),
+      @DynamoDbSecondaryPartitionKey(indexNames = {GIS_SCHEDULES_BY_CUSTOMER_ID})}))
   private String customerId;
-
-  @DynamoDbPartitionKey
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  @DynamoDbAttribute(value = "name")
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  @DynamoDbAttribute(value = "timer")
-  public String getTimer() {
-    return timer;
-  }
-
-  public void setTimer(String timer) {
-    this.timer = timer;
-  }
-
-  @DynamoDbAttribute(value = "emails")
-  public String getEmails() {
-    return emails;
-  }
-
-  public void setEmails(String emails) {
-    this.emails = emails;
-  }
-
-  @DynamoDbAttribute(value = "testId")
-  @DynamoDbSecondaryPartitionKey(indexNames = {GIS_SCHEDULES_BY_TEST_ID})
-  public String getTestId() {
-    return testId;
-  }
-
-  public void setTestId(String testId) {
-    this.testId = testId;
-  }
-
-  @DynamoDbAttribute(value = "regionName")
-  public String getRegionName() {
-    return regionName;
-  }
-
-  public void setRegionName(String regionName) {
-    this.regionName = regionName;
-  }
-
-  @DynamoDbSecondaryPartitionKey(indexNames = {GIS_SCHEDULES_BY_CUSTOMER_ID})
-  @DynamoDbAttribute(value = "customerId")
-  public String getCustomerId() {
-    return customerId;
-  }
-
-  public void setCustomerId(String customerId) {
-    this.customerId = customerId;
-  }
+  @Setter
+  @Getter(onMethod = @__({@DynamoDbAttribute(value = "created")}))
+  private Instant created;
+  @Setter
+  @Getter(onMethod = @__({@DynamoDbAttribute(value = "lastModified")}))
+  private Instant lastModified;
 }
