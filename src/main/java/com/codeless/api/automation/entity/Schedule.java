@@ -20,7 +20,7 @@ public class Schedule {
 
   public static final String PARTITION_KEY_ATTRIBUTE_NAME = "id";
   public static final String GSI_SCHEDULES_BY_CUSTOMER_ID = "GSI_SCHEDULES_BY_CUSTOMER_ID";
-  public static final String GSI_SCHEDULES_BY_TEST_ID = "GIS_SCHEDULES_BY_TEST_ID";
+  public static final String GSI_SCHEDULES_BY_TEST_ID = "GSI_SCHEDULES_BY_TEST_ID";
 
   @Setter
   @Getter(onMethod = @__({@DynamoDbPartitionKey}))
