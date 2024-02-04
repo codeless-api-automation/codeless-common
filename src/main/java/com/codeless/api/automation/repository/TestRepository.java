@@ -73,13 +73,14 @@ public class TestRepository {
       Map<String, AttributeValue> lastEvaluatedKey,
       Integer maxResults) {
     try {
-    QueryEnhancedRequest request = QueryEnhancedRequest.builder()
-        .queryConditional(QueryConditional.keyEqualTo(Key.builder()
-            .partitionValue(customerId)
-            .build()))
-        .limit(maxResults)
-        .exclusiveStartKey(lastEvaluatedKey)
-        .build();
+      QueryEnhancedRequest request = QueryEnhancedRequest.builder()
+          .queryConditional(QueryConditional.keyEqualTo(Key.builder()
+              .partitionValue(customerId)
+              .build()))
+          .limit(maxResults)
+          .exclusiveStartKey(lastEvaluatedKey)
+          .scanIndexForward(false) // set to false for descending order by created date
+          .build();
       return testTable.index(Test.GSI_TESTS_BY_CUSTOMER_ID)
           .query(request).stream()
           .limit(1)

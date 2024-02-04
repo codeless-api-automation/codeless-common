@@ -95,6 +95,7 @@ public class ScheduleRepository {
               .build()))
           .limit(maxResults)
           .exclusiveStartKey(lastEvaluatedKey)
+          .scanIndexForward(false) // set to false for descending order by created date
           .build();
       return scheduleTable.index(Schedule.GSI_SCHEDULES_BY_CUSTOMER_ID)
           .query(request).stream()

@@ -78,6 +78,7 @@ public class ExecutionRepository {
               .build()))
           .limit(maxResults)
           .exclusiveStartKey(lastEvaluatedKey)
+          .scanIndexForward(false) // set to false for descending order by created date
           .build();
       return executionTable.index(Execution.GSI_EXECUTIONS_BY_CUSTOMER_ID)
           .query(request).stream()

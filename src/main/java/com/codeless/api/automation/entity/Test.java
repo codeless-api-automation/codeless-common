@@ -9,6 +9,7 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbAttri
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSecondaryPartitionKey;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSecondarySortKey;
 
 @DynamoDbBean
 @NoArgsConstructor
@@ -34,7 +35,9 @@ public class Test {
       @DynamoDbSecondaryPartitionKey(indexNames = {GSI_TESTS_BY_CUSTOMER_ID})}))
   private String customerId;
   @Setter
-  @Getter(onMethod = @__({@DynamoDbAttribute(value = "created")}))
+  @Getter(onMethod = @__({
+      @DynamoDbAttribute(value = "created"),
+      @DynamoDbSecondarySortKey(indexNames = {GSI_TESTS_BY_CUSTOMER_ID})}))
   private Instant created;
   @Setter
   @Getter(onMethod = @__({@DynamoDbAttribute(value = "lastModified")}))
