@@ -1,6 +1,7 @@
 package com.codeless.api.automation.entity;
 
 
+import com.codeless.api.automation.entity.enums.ScheduleState;
 import java.time.Instant;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,6 +36,9 @@ public class Schedule {
   @Setter
   @Getter(onMethod = @__({@DynamoDbAttribute(value = "emails")}))
   private String emails;
+  @Setter
+  @Getter(onMethod = @__({@DynamoDbAttribute(value = "scheduleState")}))
+  private ScheduleState scheduleState;
   @Setter
   @Getter(onMethod = @__({
       @DynamoDbAttribute(value = "testId"),
