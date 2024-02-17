@@ -38,4 +38,8 @@ public class TimeSeriesRepository {
     return jedisPool.tsRange(key, fromTimestamp, toTimestamp);
   }
 
+  public void delete(String key) {
+    jedisPool.del(key);
+  }
+
 }
