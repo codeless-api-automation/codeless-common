@@ -1,5 +1,6 @@
 package com.codeless.api.automation.entity;
 
+import com.codeless.api.automation.entity.enums.UserPlan;
 import java.io.Serializable;
 import java.time.Instant;
 import lombok.AllArgsConstructor;
@@ -42,6 +43,9 @@ public class User implements Serializable {
   @Setter
   @Getter(onMethod = @__({@DynamoDbAttribute(value = "isEnabled")}))
   private boolean isEnabled;
+  @Setter
+  @Getter(onMethod = @__({@DynamoDbAttribute(value = "userPlan")}))
+  private UserPlan userPlan;
   @Setter
   @Getter(onMethod = @__({@DynamoDbAttribute(value = "token")}))
   private String token;
