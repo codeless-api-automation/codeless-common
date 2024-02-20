@@ -89,4 +89,27 @@ public class ExecutionRepository {
       throw new PersistenceException(e);
     }
   }
+
+  public Page<Execution> listExecutionsByScheduleId(
+      String scheduleId,
+      Map<String, AttributeValue> lastEvaluatedKey,
+      Integer maxResults) {
+    try {
+      QueryEnhancedRequest request = QueryEnhancedRequest.builder()
+          .queryConditional(QueryConditional.keyEqualTo(Key.builder()
+              .partitionValue(scheduleId)
+              .build()))
+          .limit(maxResults)
+          .exclusiveStartKey(lastEvaluatedKey)
+          .scanIndexForward(false) // set to false for descending order by created date
+          .build();
+      return executionTable.index(Execution.GSI_EXECUTIONS_BY_SCHEDULE_ID)
+          .query(request).stream()
+          .limit(1)
+          .collect(Collectors.toList())
+          .get(0);
+    } catch (SdkException e) {
+      throw new PersistenceException(e);
+    }
+  }
 }
