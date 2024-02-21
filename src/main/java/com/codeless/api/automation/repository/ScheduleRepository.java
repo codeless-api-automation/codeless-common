@@ -49,6 +49,11 @@ public class ScheduleRepository {
     }
   }
 
+  public void put(Schedule schedule) {
+    Objects.requireNonNull(schedule);
+    scheduleTable.putItem(schedule);
+  }
+
   public Schedule get(String id) {
     return scheduleTable.getItem(Key.builder()
         .partitionValue(id)
