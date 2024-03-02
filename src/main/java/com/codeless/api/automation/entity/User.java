@@ -55,4 +55,10 @@ public class User implements Serializable {
   @Setter
   @Getter(onMethod = @__({@DynamoDbAttribute(value = "lastModified")}))
   private Instant lastModified;
+  @Setter
+  @Getter(onMethod = @__({@DynamoDbAttribute(value = "testsCounter")}))
+  private Integer testsCounter;
+  @Setter
+  @Getter(onMethod = @__({@DynamoDbAttribute(value = "schedulesCounter")}))
+  private Integer schedulesCounter;
 }
